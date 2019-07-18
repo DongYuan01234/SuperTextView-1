@@ -11,10 +11,10 @@
  * or implied. See the License for the specific language governing permissions and limitations under
  * the License.
  * <p>
- * Last modified 17-8-2 下午3:07
+ * Last modified 17-11-14 上午12:02
  */
 
-package com.coorchice.library;
+package com.coorchice.library.sys_adjusters;
 
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -23,6 +23,8 @@ import android.graphics.Path;
 import android.graphics.RectF;
 import android.view.MotionEvent;
 
+import com.coorchice.library.SuperTextView;
+
 /**
  * Project Name:SuperTextView
  * Author:CoorChice
@@ -30,6 +32,9 @@ import android.view.MotionEvent;
  * Notes:
  */
 
+/**
+ * @hide
+ */
 public class PressAdjuster extends SuperTextView.Adjuster {
 
   private int pressBgColor = Color.TRANSPARENT;
@@ -40,7 +45,7 @@ public class PressAdjuster extends SuperTextView.Adjuster {
   private RectF solidRectF;
   private Paint paint;
 
-  protected PressAdjuster(int pressBgColor) {
+  public PressAdjuster(int pressBgColor) {
     this.pressBgColor = pressBgColor;
     setOpportunity(Opportunity.BEFORE_DRAWABLE);
     initPaint();
@@ -55,13 +60,20 @@ public class PressAdjuster extends SuperTextView.Adjuster {
     paint.setDither(true);
   }
 
-  protected PressAdjuster setPressTextColor(int pressTextColor) {
+  public SuperTextView.Adjuster setPressTextColor(int pressTextColor) {
     this.pressTextColor = pressTextColor;
     return this;
   }
 
+  public SuperTextView.Adjuster setPressBgColor(int pressBgColor) {
+    this.pressBgColor = pressBgColor;
+    return this;
+  }
+
+
+
   @Override
-  protected void adjust(SuperTextView v, Canvas canvas) {
+  public void adjust(SuperTextView v, Canvas canvas) {
     if (press) {
       if (solidPath == null) {
         solidPath = new Path();
